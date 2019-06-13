@@ -129,12 +129,11 @@ func createDBIfNotExist(dataSourceName string) error {
 
 func createIndex(db *sql.DB, indexStmt string) error {
 	_, err := db.Exec(indexStmt)
+	// check if its a duplicate error
 	if err != nil {
-		// check if its a duplicate error
-		if err.(*mysql.MySQLError).Number == 1061 {
-			return nil
+		if mysqlError, ok := err.(*mysql.MySQLError); !ok || mysqlError.Number != 1061 {
+			return err
 		}
-		return err
 	}
 	return nil
 }

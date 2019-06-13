@@ -102,8 +102,10 @@ func createDBIfNotExist(dataSourceName string) error {
 	}
 	_, err = db.Exec(createDB)
 	// check if database already exists
-	if err != nil && err.(*pq.Error).Code != "42P04" {
-		return err
+	if err != nil {
+		if pqError, ok := err.(*pq.Error); !ok || pqError.Code != "42P04" {
+			return err
+		}
 	}
 	return nil
 }
