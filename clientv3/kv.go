@@ -115,12 +115,12 @@ func newKV(cfg Config) (*kv, error) {
 		}
 		driver = sqlite.NewSQLite()
 	case "mysql":
-		if db, err = mysql.Open(parts[1], cfg.TLS); err != nil {
+		if db, err = mysql.Open(parts[1], cfg.TLSInfo); err != nil {
 			return nil, err
 		}
 		driver = mysql.NewMySQL()
 	case "postgres":
-		if db, err = pgsql.Open(parts[1]); err != nil {
+		if db, err = pgsql.Open(parts[1], cfg.TLSInfo); err != nil {
 			return nil, err
 		}
 		driver = pgsql.NewPGSQL()
