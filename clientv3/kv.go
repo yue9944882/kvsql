@@ -124,6 +124,8 @@ func newKV(cfg Config) (*kv, error) {
 			return nil, err
 		}
 		driver = pgsql.NewPGSQL()
+	default:
+		return nil, fmt.Errorf("unknown driver type [%s]", parts[0])
 	}
 
 	if err := driver.Start(context.TODO(), db); err != nil {
