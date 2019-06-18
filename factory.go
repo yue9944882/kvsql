@@ -72,7 +72,7 @@ func newETCD3Client(c storagebackend.Config) (*clientv3.Client, error) {
 		CAFile:   c.CAFile,
 	}
 	cfg := clientv3.Config{
-		Endpoints: c.Transport.ServerList,
+		Endpoints: c.ServerList,
 		TLSInfo:   tlsInfo,
 	}
 
