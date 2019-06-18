@@ -67,9 +67,9 @@ func NewKVSQLHealthCheck(c storagebackend.Config) (func() error, error) {
 
 func newETCD3Client(c storagebackend.Config) (*clientv3.Client, error) {
 	tlsInfo := &transport.TLSInfo{
-		CertFile: c.Transport.CertFile,
-		KeyFile:  c.Transport.KeyFile,
-		CAFile:   c.Transport.CAFile,
+		CertFile: c.CertFile,
+		KeyFile:  c.KeyFile,
+		CAFile:   c.CAFile,
 	}
 	cfg := clientv3.Config{
 		Endpoints: c.Transport.ServerList,
